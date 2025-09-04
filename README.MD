@@ -1,123 +1,135 @@
-¿Qué es TypeScript y en qué se diferencia de JavaScript?
-TypeScript es como una versión mejorada de JavaScript. Imagina que JavaScript es un carro que puedes manejar de inmediato, pero TypeScript es el mismo carro con un sistema de seguridad adicional que te avisa si una llanta está baja o si se te olvidó abrocharte el cinturón antes de que arranques. La gran diferencia es que TypeScript agrega tipos de datos (como string, number, boolean), lo que te ayuda a encontrar errores en tu código mientras lo escribes, no cuando ya lo estás ejecutando. A pesar de esto, todo código JavaScript válido es también código TypeScript.
+# Guía Básica de TypeScript con POO
 
-Ventajas de TypeScript en la Programación Orientada a Objetos (POO)
-TypeScript es ideal para la POO porque te ayuda a construir software más robusto y fácil de mantener.
+## ¿Qué es TypeScript y en qué se diferencia de JavaScript?
+TypeScript es como una versión mejorada de JavaScript.  
+Imagina que **JavaScript es un carro** que puedes manejar de inmediato, pero **TypeScript es ese mismo carro con un sistema de seguridad adicional** que te avisa si una llanta está baja o si se te olvidó abrocharte el cinturón antes de que arranques.  
 
-Tipado Estático: Te obliga a ser más organizado con tus datos. Por ejemplo, si una propiedad de una clase debe ser un número, TypeScript no te dejará asignarle un texto. Esto evita errores tontos y hace tu código más predecible.
+La gran diferencia es que **TypeScript agrega tipos de datos** (string, number, boolean), lo que ayuda a encontrar errores mientras escribes el código, no cuando ya lo ejecutas.  
+👉 Todo código JavaScript válido también es válido en TypeScript.
 
-Interfaces: Son como contratos que tus clases deben cumplir. Una interfaz te dice: "Si quieres ser una clase de Vehiculo, tienes que tener una propiedad velocidad y un método acelerar()". Esto asegura que todos los objetos que representen lo mismo se comporten de manera similar.
+---
 
-Modificadores de Acceso: Te permiten controlar quién puede ver y usar las propiedades y métodos de una clase. Esto es clave para el encapsulamiento, un pilar de la POO.
+## Ventajas de TypeScript en la Programación Orientada a Objetos (POO)
+- **Tipado Estático**: te obliga a ser más organizado con tus datos.  
+- **Interfaces**: son contratos que aseguran que todas las clases que los implementen se comporten de forma similar.  
+- **Modificadores de Acceso**: controlan quién puede acceder a las propiedades y métodos de una clase (encapsulamiento).
 
-Modificadores de acceso (public, private, protected)
-Son como llaves que definen el acceso a las partes de una clase.
+---
 
-public: Es el acceso por defecto, la "puerta principal". Cualquiera puede entrar y usar lo que esté adentro.
+## Modificadores de Acceso
+Los modificadores controlan el acceso a las partes de una clase:
 
-TypeScript
-
+- **`public`** → acceso libre (por defecto).  
+```ts
 class Coche {
     public marca: string;
 }
-
-private: El acceso es restringido, la "caja fuerte". Solo la clase en sí misma puede usar lo que está dentro. Ni siquiera otras clases que hereden de ella pueden acceder.
-
-TypeScript
-
+private → acceso restringido a la clase.
 class CuentaBancaria {
     private saldo: number;
 }
-
-protected: El acceso es para la "familia". La clase y sus "hijos" (clases que heredan de ella) pueden usar lo que está dentro, pero nadie más.
-
-TypeScript
-
+protected → acceso desde la clase y sus herederas.
 class Vehiculo {
     protected velocidad: number;
 }
+readonly
 
-¿Qué es un readonly y para qué se usa?
-readonly es como un candado que pones a una propiedad. Una vez que le asignas un valor (generalmente en el constructor), no se puede cambiar. Esto es perfecto para cosas que no deberían variar, como el número de identificación de un usuario o la fecha de creación de un registro.
-
-¿Cómo se definen clases y objetos en TS?
-Una clase es el plano o diseño de un objeto. Un objeto es una instancia, es decir, un ejemplar real de esa clase.
-
-Clase: Se define con la palabra class.
-
-TypeScript
-
+Es un candado: una vez asignado un valor (generalmente en el constructor), no se puede modificar.
+Ideal para propiedades que no deben cambiar, como un número de identificación.
+class Usuario {
+    readonly id: number;
+    constructor(id: number) {
+        this.id = id;
+    }
+}
+Clases y Objetos en TS
+Clase: el plano o diseño del objeto.
+Objeto: una instancia real de la clase.
 class Persona {
     nombre: string;
-}
-
-Objeto: Se crea usando la palabra new.
-
-TypeScript
-
+}   
 const persona1 = new Persona();
-¿Qué son los constructores y para qué sirven?
-El constructor es un método especial que se ejecuta automáticamente cuando creas un nuevo objeto. Su única tarea es preparar el objeto, dándole valores iniciales a sus propiedades. Es como la cadena de montaje de una fábrica que le pone el motor y las llantas a un carro nuevo.
-
-TypeScript
-
+Constructores
+Método especial que se ejecuta automáticamente al crear un nuevo objeto.
+Sirve para inicializar valores de propiedades.
 class Libro {
     titulo: string;
     constructor(titulo: string) {
         this.titulo = titulo;
     }
 }
-
-const miLibro = new Libro("1984"); // El constructor se ejecuta aquí.
-¿Qué es la herencia en TS y cómo se implementa?
-La herencia permite que una clase "hija" tome las propiedades y métodos de una clase "padre". Esto te ahorra mucho trabajo porque no tienes que escribir el mismo código una y otra vez.
-
-extends: Se usa en la clase hija para decir de qué clase padre hereda.
-
-super(): Se usa en el constructor de la clase hija para llamar al constructor de la clase padre y asegurarse de que sus propiedades también se inicialicen correctamente.
-
-TypeScript
-
+const miLibro = new Libro("1984");
+Permite que una clase "hija" tome propiedades y métodos de una clase "padre".
+extends → define la herencia.
+super() → llama al constructor de la clase padre.
 class Animal {
     constructor(public nombre: string) {}
 }
 class Perro extends Animal {
     constructor(nombre: string) {
-        super(nombre); // Llama al constructor de Animal
+        super(nombre);
     }
 }
+Polimorfismo
 
-¿Qué significa polimorfismo en el contexto de TS?
-Polimorfismo significa "muchas formas". En TypeScript, esto se refiere a la capacidad de que objetos de diferentes clases (pero que comparten una herencia o una interfaz común) puedan ser tratados de la misma manera. Por ejemplo, si tienes una clase Perro y una clase Gato que heredan de Animal, puedes tener una lista de Animales y llamar a un método hacerSonido() en cada uno. Aunque el método se llame igual, el Perro ladrará y el Gato maullará.
+Significa "muchas formas". Permite que objetos de diferentes clases se traten de la misma manera si comparten una herencia o interfaz.
+abstract class Animal {
+    abstract hacerSonido(): void;
+}
 
-¿Qué son las clases abstractas y qué diferencia tienen con una clase normal?
-Clase normal: Puedes crear objetos directamente de ella con new.
+class Perro extends Animal {
+    hacerSonido() { console.log("Guau!"); }
+}
 
-Clase abstracta: No puedes crear objetos directamente de ella. Es un plano incompleto que obliga a sus clases "hijas" a completar ciertas funcionalidades. Es como la maqueta de una casa que no puedes habitar, pero que te obliga a construir las paredes y el techo si quieres hacer una casa de verdad.
+class Gato extends Animal {
+    hacerSonido() { console.log("Miau!"); }
+}
 
-¿Qué es una interface en TS y en qué se diferencia de una clase abstracta?
-interface: Define un contrato. Solo dice "qué" debe tener una clase (qué métodos, qué propiedades), pero no "cómo" implementarlo. Una clase puede cumplir con varios contratos a la vez.
+const animales: Animal[] = [new Perro(), new Gato()];
+animales.forEach(a => a.hacerSonido()); // Guau! / Miau!
+Clases Abstractas vs Clases Normales
 
-Clase abstracta: Puede contener código de verdad (implementación) y, además, definir métodos abstractos que las clases hijas deben implementar. Una clase solo puede heredar de una única clase abstracta.
+Clase normal → puedes crear objetos directamente con new.
+Clase abstracta → no puedes crear objetos directamente; obliga a que sus hijas implementen métodos incompletos
+abstract class Empleado {
+    abstract calcularSalario(): number;
+}
+Interfaces vs Clases Abstractas
 
-Pilares de la POO en TS: Ejemplo mínimo
-Abstracción: abstract class Empleado { abstract calcularSalario(): number; }
+Interface → define un contrato (qué debe tener una clase), no la implementación. Una clase puede implementar varias interfaces.
 
-Encapsulamiento: private _nombre: string;
+Clase abstracta → puede tener implementación real y métodos abstractos. Una clase solo puede heredar de una única clase abstracta.
 
-Herencia: class Gerente extends Empleado { ... }
+Pilares de la POO en TS (Ejemplo mínimo)
 
-Polimorfismo: let empleado: Empleado = new Gerente();
+Abstracción
+abstract class Empleado { abstract calcularSalario(): number; }
+Encapsulamiento
+private _nombre: string;
+
+Herencia
+class Gerente extends Empleado { ... }
+
+Polimorfismo
+let empleado: Empleado = new Gerente();
 
 Configuración de TypeScript con Node.js y VS Code
-Instala Node.js: Es la base para que corra JavaScript fuera del navegador. Puedes descargarlo de su página oficial.
 
-Crea tu proyecto: En la terminal, haz npm init -y en una carpeta vacía.
+Instalar Node.js
+Descárgalo de su página oficial.
 
-Instala TypeScript: Con el comando npm install typescript --save-dev. Esto lo agrega a tu proyecto.
+Crear proyecto
+npm init -y
 
-Genera el archivo tsconfig.json: Ejecuta npx tsc --init. Este archivo es tu manual de instrucciones para el compilador de TypeScript.
+Instalar TypeScript
+npm install typescript --save-dev
 
-Instala los tipos de Node: Si usarás cosas de Node.js, como el sistema de archivos, instala npm install @types/node --save-dev.
+Generar archivo de configuración
+npx tsc --init
 
-Usa VS Code: El editor ya viene listo para trabajar con TypeScript. Simplemente abre la carpeta de tu proyecto y ¡a programar! Para compilar tu código, usa el comando tsc y luego node para ejecutar el archivo JavaScript que se generó.
+Instalar tipos de Node.js (opcional)
+npm install @types/node --save-dev
+
+Compilar y ejecutar
+tsc archivo.ts
+node archivo.js
