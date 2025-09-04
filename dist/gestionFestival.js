@@ -1,9 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Festival = exports.Entrada = exports.Staff = exports.Artista = exports.Participante = void 0;
 class Participante {
     nombre;
     constructor(nombre) {
         this.nombre = nombre;
     }
 }
+exports.Participante = Participante;
 class Artista extends Participante {
     genero;
     tipo;
@@ -19,6 +23,7 @@ class Artista extends Participante {
         return `🎶 ${this.nombre} está tocando su ${this.tipo}`;
     }
 }
+exports.Artista = Artista;
 class Staff extends Participante {
     rol;
     constructor(nombre, rol) {
@@ -29,6 +34,7 @@ class Staff extends Participante {
         return `👷 Soy ${this.nombre}, mi rol como staff es: ${this.rol}`;
     }
 }
+exports.Staff = Staff;
 class Entrada {
     precio;
     codigo;
@@ -43,6 +49,7 @@ class Entrada {
         this.precio = precio;
     }
 }
+exports.Entrada = Entrada;
 class Festival {
     nombre;
     artistas = [];
@@ -71,5 +78,5 @@ class Festival {
         return this.entradas.reduce((total, entrada) => total + entrada.getPrecio(), 0);
     }
 }
-export { Participante, Artista, Staff, Entrada, Festival };
+exports.Festival = Festival;
 //# sourceMappingURL=gestionFestival.js.map

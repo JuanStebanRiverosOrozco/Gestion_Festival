@@ -1,6 +1,7 @@
 import { input, select } from "@inquirer/prompts";
-import { Artista, Staff, Entrada, Festival } from "./gestionFestival.js";
+import { Artista, Staff, Entrada, Festival } from "./gestionFestival";
 
+async function main() {
 // MENÚ INTERACTIVO
 const festival = new Festival("Live Music Fest");
 
@@ -61,3 +62,6 @@ while (true) {
     console.log(`💰 Total recaudado: $${festival.totalRecaudado().toLocaleString()}`);
   }
 }
+}
+
+main();
